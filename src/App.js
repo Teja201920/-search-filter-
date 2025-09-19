@@ -1,23 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
 function App() {
+  // List of names
+  const students = [
+    "Tejaswarrao",
+    "Prasanna",
+    "Sai Teja",
+    "Abhishek",
+    "Dhilli Rao"
+  ];
+
+  // State for search input
+  const [search, setSearch] = useState("");
+
+  // Filter list based on search input
+  const filteredStudents = students.filter((student) =>
+    student.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h1>Search Filter Example</h1>
+
+      <input
+        type="text"
+        placeholder="Search student..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        style={{ padding: "8px", fontSize: "16px", marginBottom: "20px" }}
+      />
+
+      <ul style={{ listStyle: "none", padding: 0 }}>
+        {filteredStudents.map((student, index) => (
+          <li
+            key={index}
+            style={{ margin: "8px", fontSize: "18px", color: "blue" }}
+          >
+            {student}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
